@@ -1,6 +1,6 @@
 // //Treinamento 01
  let idade = 20;
- let nome = "João Vitor";
+ let nome = "Joao";
  let altura = 182;
  console.log(nome);
  console.log(idade);
