@@ -10,6 +10,30 @@ const codes = [
         path: "Questoes JS/NumerosPrimos.js"
     },
     {
+        title: "Contador de Astericos",
+        path: "Questoes JS/ContadorAsteriscos.js"
+    },
+    {
+        title: "Encontra String",
+        path: "Questoes JS/EncontraString.js"
+    },
+    {
+        title: "Factory Function",
+        path: "Questoes JS/FactoryFunction.js"
+    },
+    {
+        title: "Media de nota",
+        path: "Questoes JS/MediaNota.js"
+    },
+    {
+        title: "Radar de Velocidade",
+        path: "Questoes JS/MedidorVelocidade.js"
+    },
+    {
+        title: "Par e Impar",
+        path: "Questoes JS/ParImpar.js"
+    },
+    {
         title: "Números Perfeitos",
         path: "Questoes JS/NumerosPerfeitos.js"
     }
@@ -28,6 +52,7 @@ codes.forEach((item) => {
             .then(response => response.text())
             .then(text => {
                 codeDisplay.textContent = text;
+                Prism.highlightElement(codeDisplay);
             })
             .catch(err => {
                 codeDisplay.textContent = "Erro ao carregar o código.";
@@ -35,4 +60,15 @@ codes.forEach((item) => {
             });
     });
     codeList.appendChild(btn);
+});
+
+// botão de cópia
+const copyButton = document.getElementById('copy-button');
+
+copyButton.addEventListener('click', () => {
+    const code = document.getElementById('code-display').textContent;
+navigator.clipboard.writeText(code).then(() => {
+    copyButton.textContent = '✅ Copiado!';
+    setTimeout(() => copyButton.textContent = '📋 Copiar código', 2000);
+    });
 });
