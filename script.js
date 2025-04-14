@@ -43,11 +43,24 @@ const codes = [
 const codeList = document.getElementById('code-list');
 const codeDisplay = document.getElementById('code-display');
 
+let activePath = null;
+
+// função para mostrar texto de introdução
+function showDefaultMessage () {
+    codeDisplay.textContent = "Introdução";
+    Prism.highlightElement(codeDisplay);
+    activePath = null;
+}
+
 // forEach para os códigos e botão para exibir
 codes.forEach((item) => {
     const btn = document.createElement('button');
     btn.textContent = item.title;
     btn.addEventListener('click' ,() => {
+        if (activePath === item.path) {
+            showDefaultMessage();
+            return;
+        }
         fetch(item.path)
             .then(response => response.text())
             .then(text => {
@@ -56,10 +69,10 @@ codes.forEach((item) => {
             })
             .catch(err => {
                 codeDisplay.textContent = "Erro ao carregar o código.";
-                console.error(err);
+                activePath = null;
             });
     });
-    codeList.appendChild(btn);
+    document.getElementById('code-list').appendChild(btn);
 });
 
 // botão de cópia
@@ -72,3 +85,6 @@ navigator.clipboard.writeText(code).then(() => {
     setTimeout(() => copyButton.textContent = '📋 Copiar código', 2000);
     });
 });
+
+// inicializa com introdução
+showDefaultMessage();
