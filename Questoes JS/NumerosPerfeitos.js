@@ -1,4 +1,4 @@
-// Criar uma função para mostrar os números primos
+// Criar uma função para mostrar os números perfeitos
 
 exibirNumerosPerfeitos(100000000);
 
